@@ -1,8 +1,14 @@
-console.log("Hello, world!");
-const http = require("http")
 
-const server = http.createServer((req, res) => {
-    console.log(req);
-})
+// const logger = require('./logger')
+const { text, greetings } = require('./logger')
 
-server.listen(3000)
+
+
+console.log(module)
+
+// logger.text
+// logger.sayHi('Mortaza')
+
+console.log(text);
+console.log(greetings('Mortaza'))
+
