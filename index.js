@@ -6,7 +6,7 @@ const { text, greetings } = require('./logger')
 
 
 
-console.log(module)
+// console.log(module)
 
 // logger.text
 // logger.sayHi('Mortaza')
