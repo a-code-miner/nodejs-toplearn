@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.7",
-    "chalk": "^5.4.1"
+    "chalk": "^5.4.1",
+    "yargs": "^18.0.0"
   }
 }
