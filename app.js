@@ -1,6 +1,6 @@
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
-const { alias } = require('yargs');
+import yargs from 'yargs/yargs';
+import { hideBin } from 'yargs/helpers';
+import contacts from './contacts.js';
 
 yargs(hideBin(process.argv))
     .command({
@@ -27,10 +27,11 @@ yargs(hideBin(process.argv))
                 type: 'string',
             }
         },
-        handler: function (argv) {
-            console.log("Creating contact with name:", argv.fullname);
-            console.log("Creating contact with phone:", argv.phone);
-            console.log("Creating contact with email:", argv.email);
+        handler: function ({ fullname, phone, email }) {
+            // console.log("Creating contact with name:", argv.fullname);
+            // console.log("Creating contact with phone:", argv.phone);
+            // console.log("Creating contact with email:", argv.email);
+            contacts.addContact(fullname, phone, email)
         },
     })
     .parse(); // <-- بدون این خط دستورات اجرا نمی‌شوند
