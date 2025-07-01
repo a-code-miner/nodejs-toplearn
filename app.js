@@ -1,54 +1,39 @@
-const fs = require('fs')
-const os = require('os')
+// const fs = require('fs')
+
+// const persons = [
+//     { id: 1, name: 'John', age: 14 },
+//     { id: 2, name: 'Jane', age: 22 },
+//     { id: 3, name: 'Doe', age: 30 },
+// ]
+
+// // fs.writeFileSync('persons.json', JSON.stringify(persons))
+
+// const data = fs.readFileSync('persons.json')
+// const personsFromFile = JSON.parse(data.toString())
+// console.log('personsFromFile = ', personsFromFile)
 
 
+console.log(process.argv)
 
-// Uncomment the following lines to test file operations
-// fs.writeFile('text.txt', 'Hello, this is a test file written by Node.JS!', (err) => {
-//     if (err) throw err
-//     console.log('File has been saved!')
-// })
+const command = process.argv[2]
 
-// fs.readFile('text.txt', 'utf-8', (err, data) => {
-//     if (err) throw err
-//     console.log(data)
-// })
+// if (command === 'add') {
+//     console.log('Adding a new person...')
+// } else if (command === 'remove') {
+//     console.log('Removing a person...')
+// } else {
+//     console.log('Unknown command. Please use "add" or "remove".')
+// }
 
-// fs.appendFile('text.txt', '\nThis is an appended text by Node.JS!', (err) => {
-//     if (err) throw err
-//     console.log('Text has been appended!')
-// })
-
-// fs.rename('text.txt', 'RenamedTextFile.txt', (err) => {
-//     if (err) throw err
-//     console.log('File has been renamed!')
-// })
-
-// fs.writeFileSync('text.txt', 'Hello, this is a test file written by Node.JS!')
-
-// fs.readFileSync('text.txt', 'utf-8', (err, data) => {
-//     if (err) throw err
-//     console.log(data)
-// })
-
-// fs.unlink('RenamedTextFile.txt', (err) => {
-//     if (err) throw err
-//     console.log('File has been deleted!')
-// })
-
-
-// Uncomment the following lines to test OS operations
-console.log(os.arch())
-console.log(os.platform())
-console.log(os.userInfo())
-console.log(os.homedir())
-console.log(os.tmpdir())
-console.log(os.hostname())
-console.log(os.uptime())
-console.log(os.type())
-
-
-console.log('first')
-console.log('second')
-
+switch (command) {
+    case 'add':
+        console.log('Adding a new person...')
+        break
+    case 'remove':
+        console.log('Removing a person...')
+        break
+    default:
+        console.log('Unknown command. Please use "add" or "remove".')
+        break
+}
 
