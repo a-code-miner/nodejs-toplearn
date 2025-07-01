@@ -14,5 +14,8 @@
     "bootstrap": "^5.3.7",
     "chalk": "^5.4.1",
     "yargs": "^18.0.0"
+  },
+  "bin": {
+    "contacts-cli": "./app.js"
   }
 }
