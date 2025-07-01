@@ -5,10 +5,10 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -e js,html,json index.js"
+    "start": "nodemon -e js,html,json app.js"
   },
   "dependencies": {
     "bootstrap": "^5.3.7",
