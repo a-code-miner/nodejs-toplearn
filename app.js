@@ -1,16 +1,19 @@
-import { EventEmitter } from 'events'
+
+import http from 'http'
 
 
-const eventEmitter = new EventEmitter()
-
-eventEmitter.addListener('firstEvent', (data) => {
-    console.log('firstEvent listener called', data)
+const server = http.createServer((req, res) => {
+    const { url, method, headers } = req
+    console.log(`Request URL: ${url} - Method: ${method} - Headers: ${headers}`)
+    res.setHeader('Content-Type', 'text/html')
+    res.write('<html>')
+    res.write('<head><title>My first webpage</title></head>')
+    res.write('<body><h1>Hello world</h1></body>')
+    res.write('</html>')
+    res.end()
 })
 
-eventEmitter.on('secondEvent', (data) => {
-    console.log('secondEvent listener called', data)
-})
 
-eventEmitter.emit('firstEvent', { id: 1, name: 'first' })
-eventEmitter.emit('secondEvent', { id: 2, name: 'second' })
+server.listen(3000)
+
 
