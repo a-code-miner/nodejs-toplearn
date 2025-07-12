@@ -12,6 +12,7 @@ const bodyParserMiddleware = bodyParser.urlencoded({ extended: false })
 // Middleware to parse incoming request bodies
 app.use(bodyParserMiddleware) // for using third-party middlewares we must use app.use()
 
+app.use(express.static('public')) // Serve static files from the 'public' directory
 
 // Routes Start
 app.use('/admin', adminRoutes)
