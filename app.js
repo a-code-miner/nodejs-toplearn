@@ -18,6 +18,9 @@ app.use('/admin', adminRoutes)
 app.use(homeRoutes)
 // Routes End
 
+app.use((req, res) => {
+    res.status(404).sendFile('404.html', { root: 'views' })
+})
 
 app.listen('3000')
 
