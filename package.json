@@ -5,10 +5,10 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -e js,html,json app.js"
+    "start": "nodemon -e js,html,json server.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
@@ -16,6 +16,7 @@
     "chalk": "^5.4.1",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "font-awesome": "^4.7.0",
     "yargs": "^18.0.0"
   }
 }

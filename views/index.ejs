@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include ('./includes/head.ejs') %>
 
-    <body>
-        <div>
-            <h1>This is an EJS Template</h1>
-        </div>
-        <hr />
-        <a href="#" class="<%= path == '/' ? 'active' : '' %>">Home page</a>
-        <%- include ('./includes/names.ejs') %>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.rtl.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <button class="btn btn-primary">سلام</button>
+</body>
 
 </html>
