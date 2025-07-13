@@ -1,0 +1,19 @@
+extends ./layouts/main.pug
+block styles
+    link(rel="stylesheet", href="css/styles.css")
+
+
+block content
+    .center
+        h1 PUG Template Engine
+        p This is a simple example of using PUG as a template engine in Node.js.
+        a(href="/hello") Go to Hello Page
+    hr
+    .container
+        h2 User List 
+        ul 
+            if data && data.length > 0
+                each user in data 
+                    li #{user.name} - Age #{user.age}
+            else
+                li No users found!
