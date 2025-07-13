@@ -1,0 +1,15 @@
+<% if (users.length> 0) { %>
+    <div>
+        <% for (let person of users) { %>
+            <ul>
+                <li>
+                    <%= person.name %> - <%= person.age %>
+                </li>
+            </ul>
+            <% } %>
+    </div>
+    <% } else { %>
+        <div>
+            <p>No users found.</p>
+        </div>
+        <% } %>
