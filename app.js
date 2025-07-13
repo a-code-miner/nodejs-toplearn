@@ -1,13 +1,14 @@
 import express from 'express'
-import bodyParser from 'body-parser'
+import { engine } from 'express-handlebars'
 
 
 const app = express()
 
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static('public'))
 
-app.set('view engine', 'pug')
+app.engine('hbs', engine({ extname: 'hbs', defaultLayout: 'main', layoutsDir: 'views/layouts', partialsDir: 'views/partials' }))
+
+app.set('view engine', 'hbs')
 app.set('views', 'views')
 
 app.get('/hello', (req, res) => {
@@ -16,11 +17,11 @@ app.get('/hello', (req, res) => {
 
 app.get('/', (req, res) => {
     const arr = [
-        { name: 'Alice', age: 30 },
-        { name: 'Bob', age: 25 },
-        { name: 'Charlie', age: 35 }
+        { name: 'John', age: 30 },
+        { name: 'Jane', age: 25 },
+        { name: 'Doe', age: 40 }
     ]
-    res.render('index', { title: 'Welcome to my app', data: arr })
+    res.render('index', { title: 'My webpage', users: arr, home: true, hasName: arr.length > 0 })
 })
 
 app.listen(3000, () => {
