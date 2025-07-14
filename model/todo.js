@@ -56,5 +56,56 @@ export class Todo {
         })
     }
 
+    static deleteTodoById(id, callback) {
+        fs.readFile(filePath, 'utf8', (err, fileContent) => {
+            if (err) return callback(err)
+
+            let todos = []
+
+            try {
+                todos = JSON.parse(fileContent)
+                if (!Array.isArray(todos)) {
+                    todos = [] // اگر JSON یک آرایه نبود، از اول آرایه بساز
+                }
+            } catch (e) {
+                return callback(e)
+            }
+
+            todos = todos.filter(todo => todo.id !== Number(id))
+
+            fs.writeFile(filePath, JSON.stringify(todos, null, 2), (err) => {
+                if (err) callback(err)
+                else callback(null)
+            });
+        })
+    }
+
+    static completeTodoById(id, callback) {
+        fs.readFile(filePath, 'utf8', (err, fileContent) => {
+            if (err) return callback(err)
+
+            let todos = []
+
+            try {
+                todos = JSON.parse(fileContent)
+                if (!Array.isArray(todos)) {
+                    todos = [] // اگر JSON یک آرایه نبود، از اول آرایه بساز
+                }
+            } catch (e) {
+                return callback(e)
+            }
+
+            const todoIndex = todos.findIndex(todo => todo.id === Number(id))
+            if (todoIndex !== -1) {
+                todos[todoIndex].completed = true
+            }
+
+            fs.writeFile(filePath, JSON.stringify(todos, null, 2), (err) => {
+                if (err) callback(err)
+                else callback(null)
+            });
+        })
+    }
+
 }
 

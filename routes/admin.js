@@ -1,11 +1,16 @@
 import express from 'express'
 import { Router } from 'express'
 
-import { addTodo } from '../controllers/admin.js'
+import { addTodo, deleteTodo, completeTodo } from '../controllers/admin.js'
 
 
 const router = Router()
 
-export default router.post('/add-todo', addTodo)
+router.post('/add-todo', addTodo)
+
+router.get('/delete-todo/:id', deleteTodo)
+router.get('/complete-todo/:id', completeTodo)
+
+export default router
 
 

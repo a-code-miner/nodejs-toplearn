@@ -33,22 +33,32 @@
         <% if (todos.length> 0) { %>
             <ul class="list-unstyled w-50 mx-auto" id="todo">
                 <% for (let todo of todos) { %>
-                    <li class="row justify-content-between align-items-center bg-info mb-3 p-2 rounded">
-                        <div class="col-5">
-                            <span class="todo-text">
-                                <%= todo.text %>
-                            </span>
+                    <li>
+                        <div
+                            class="alert <%= todo.completed ? 'alert-success' : 'alert-secondary' %> d-flex justify-content-between align-items-center">
+                            <% if (todo.completed) { %>
+                                <span class="badge rounded-pill bg-primary">
+                                    <%= todo.id %>
+                                </span>
+                                <del>
+                                    <%= todo.text %>
+                                </del>
+                                <a href="/admin/delete-todo/<%= todo.id %>" class="fa fa-trash" style="color: red;"></a>
+                                <% } else { %>
+                                    <span class="badge rounded-pill bg-primary">
+                                        <%= todo.id %>
+                                    </span>
+                                    <%= todo.text %>
+                                        <div>
+                                            <a href="/admin/delete-todo/<%= todo.id %>" class="fa fa-trash"
+                                                style="color: red;"></a>
+                                            <a href="/admin/complete-todo/<%= todo.id %>"
+                                                class="fa fa-check-square mr-2" style="color: green;"></a>
+                                        </div>
+                                        <% } %>
                         </div>
-                        <div class="col-2 text-right d-flex">
-                            <form action="/admin/delete-todo" method="POST" class="m-2">
-                                <input type="hidden" name="todoId" value="<%= todo.id %>" />
-                                <button type="submit" class="btn btn-danger fa fa-trash"></button>
-                            </form>
-                            <form action="/admin/complete-todo" method="POST" class="m-2">
-                                <input type="hidden" name="todoId" value="<%= todo.id %>" />
-                                <button type="submit" class="btn btn-success fa fa-check"></button>
-                            </form>
-                            <% } %>
+                    </li>
+                    <% } %>
             </ul>
             <% } else { %>
                 <div class="alert alert-warning w-50 mx-auto" role="alert">
