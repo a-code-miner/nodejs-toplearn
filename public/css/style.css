@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "Yekan";
+    src: url("../fonts/Yekan.eot") format("embedded-opentype"),
+        url("../fonts/Yekan.woff2") format("woff2"),
+        url("../fonts/Yekan.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Yekan", sans-serif !important;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.form-group {
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+#todo {
+    margin: 0 auto;
+    width: 500px;
+}
+
+a.close {
+    color: #fff;
+    background-color: #f00;
+    border-radius: 50%;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.addButton {
+    background-color: #28a745 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 15px 20px !important;
+    cursor: pointer !important;
+}

@@ -3,6 +3,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 
 import { setStatics } from './utils/statics.js'
+import adminRoutes from './routes/admin.js'
+import indexRoutes from './routes/index.js'
 
 const app = express()
 
@@ -20,12 +22,8 @@ setStatics(app)
 // End of Static Files
 
 // Start of routes
-app.get('/', (req, res) => {
-    res.render('index', {
-        pageTitle: 'Home Page',
-        message: 'Welcome to the Home Page!'
-    })
-})
+app.use('/admin', adminRoutes)
+app.use(indexRoutes)
 // End of routes
 
 
