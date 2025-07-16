@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import { setStatics } from './utils/statics.js'
 import adminRoutes from './routes/admin.js'
 import indexRoutes from './routes/index.js'
+import { get404 } from './controllers/error.js'
 
 const app = express()
 
@@ -26,6 +27,8 @@ app.use('/admin', adminRoutes)
 app.use(indexRoutes)
 // End of routes
 
+// 404
+app.use(get404)
 
 // Start of Server
 app.listen(3000, () => {

@@ -1,9 +1,10 @@
 import { Todo } from '../model/todo.js'
+import { generateTodoId } from '../utils/todos.js'
 
 export function addTodo(req, res) {
     if (!req.body.todo) return res.redirect('/')
     const todo = new Todo(
-        Math.floor(Math.random() * 100000000),
+        generateTodoId(),
         req.body.todo
     )
     todo.save((err) => {

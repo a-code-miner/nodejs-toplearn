@@ -1,72 +1,17 @@
-<!DOCTYPE html>
-<html lang="fa-IR" dir="rtl">
+<%- include ('./includes/head.ejs') %>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/bootstrap.rtl.css" />
-    <link rel="stylesheet" href="css/font-awesome.css" />
-    <title>
-        <%= pageTitle %>
-    </title>
-</head>
-
-<body>
     <div class="form-group">
         <h1>کارهای <small>روزمره</small></h1>
-        <form action="/admin/add-todo" role="form" class="row w-50 justify-content-center mx-auto" method="POST">
-            <div class="input-group">
-                <input type="text" name="todo" class="form-control w-50" placeholder="کار امروز" />
-                <div class="input-group-prepend">
-                    <button type="submit" class="btn btn-primary addButton fa fa-plus" />
-                </div>
+        <%- include ('./includes/todoForm.ejs') %>
+            <div class="mx-auto w-50 mb-3 alert alert-primary row">
+                <p class="d-inline col">کارهای انجام شده : <span class="badge rounded-pill bg-success">
+                        <%= completedTodos %>
+                    </span>
+                </p>
+                <p class="d-inline col">کارهای باقی مانده امروز : <span class="badge rounded-pill bg-warning">
+                        <%= pendingTodos %>
+                    </span></p>
             </div>
-        </form>
-        <div class="mx-auto w-50 mb-3 alert alert-primary row">
-            <p class="d-inline col">کارهای انجام شده : <span
-                    class="badge rounded-pill bg-success">0<!-- CompletedTodos --></span>
-            </p>
-            <p class="d-inline col">کارهای باقی مانده امروز : <span
-                    class="badge rounded-pill bg-warning">0<!-- RemainingTodos --></span></p>
-        </div>
-        <% if (todos.length> 0) { %>
-            <ul class="list-unstyled w-50 mx-auto" id="todo">
-                <% for (let todo of todos) { %>
-                    <li>
-                        <div
-                            class="alert <%= todo.completed ? 'alert-success' : 'alert-secondary' %> d-flex justify-content-between align-items-center">
-                            <% if (todo.completed) { %>
-                                <span class="badge rounded-pill bg-primary">
-                                    <%= todo.id %>
-                                </span>
-                                <del>
-                                    <%= todo.text %>
-                                </del>
-                                <a href="/admin/delete-todo/<%= todo.id %>" class="fa fa-trash" style="color: red;"></a>
-                                <% } else { %>
-                                    <span class="badge rounded-pill bg-primary">
-                                        <%= todo.id %>
-                                    </span>
-                                    <%= todo.text %>
-                                        <div>
-                                            <a href="/admin/delete-todo/<%= todo.id %>" class="fa fa-trash"
-                                                style="color: red;"></a>
-                                            <a href="/admin/complete-todo/<%= todo.id %>"
-                                                class="fa fa-check-square mr-2" style="color: green;"></a>
-                                        </div>
-                                        <% } %>
-                        </div>
-                    </li>
-                    <% } %>
-            </ul>
-            <% } else { %>
-                <div class="alert alert-warning w-50 mx-auto" role="alert">
-                    <h4 class="text-center">هنوز کاری برای انجام دادن ثبت نشده است.</h4>
-                    <p>می‌توانی کارهای امروزت را بالا بنویسی تا برایت ثبت کنم</p>
-                </div>
-                <% } %>
+            <%- include ('./includes/todos.ejs') %>
     </div>
-</body>
-
-</html>
+    <%- include ('./includes/footer.ejs') %>

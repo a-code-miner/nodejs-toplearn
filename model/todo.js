@@ -1,9 +1,4 @@
-import fs from 'fs'
-import path from 'path'
-
-import { rootDir } from '../utils/path.js'
-
-const filePath = path.join(rootDir(), 'data', 'todos.json')
+import { getTodos, saveTodos, generateTodoId } from "../utils/todos.js"
 
 export class Todo {
     constructor(id, text, completed = false) {
@@ -13,99 +8,51 @@ export class Todo {
     }
 
     save(callback) {
-        fs.readFile(filePath, 'utf8', (err, fileContent) => {
-            let todos = []
-
-            if (!err && fileContent) {
-                try {
-                    todos = JSON.parse(fileContent)
-                    if (!Array.isArray(todos)) {
-                        todos = [] // اگر JSON یک آرایه نبود، از اول آرایه بساز
-                    }
-                } catch (e) {
-                    // اگر JSON خراب بود
-                    todos = []
-                }
-            }
-
+        getTodos((err, todos) => {
+            if (err) return callback(err)
             todos.push(this)
-
-            fs.writeFile(filePath, JSON.stringify(todos, null, 2), (err) => {
+            saveTodos(todos, (err) => {
                 if (err) callback(err)
                 else callback(null)
-            });
+            })
         })
     }
 
     static getAllTodos(callback) {
-        fs.readFile(filePath, 'utf8', (err, fileContent) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                try {
-                    const todos = JSON.parse(fileContent)
-                    if (!Array.isArray(todos)) {
-                        callback(null, []) // اگر JSON یک آرایه نبود، آرایه خالی برگردان
-                    } else {
-                        callback(null, todos)
-                    }
-                } catch (e) {
-                    callback(e, null) // اگر JSON خراب بود
-                }
-            }
+        getTodos((err, todos) => {
+            if (err) callback(err, [])
+            else callback(null, todos)
         })
     }
 
     static deleteTodoById(id, callback) {
-        fs.readFile(filePath, 'utf8', (err, fileContent) => {
+        getTodos((err, todos) => {
             if (err) return callback(err)
-
-            let todos = []
-
-            try {
-                todos = JSON.parse(fileContent)
-                if (!Array.isArray(todos)) {
-                    todos = [] // اگر JSON یک آرایه نبود، از اول آرایه بساز
-                }
-            } catch (e) {
-                return callback(e)
-            }
-
-            todos = todos.filter(todo => todo.id !== Number(id))
-
-            fs.writeFile(filePath, JSON.stringify(todos, null, 2), (err) => {
+            saveTodos(todos.filter(todo => todo.id !== Number(id)), err => {
                 if (err) callback(err)
                 else callback(null)
-            });
+            })
         })
     }
 
     static completeTodoById(id, callback) {
-        fs.readFile(filePath, 'utf8', (err, fileContent) => {
+        getTodos((err, todos) => {
             if (err) return callback(err)
-
-            let todos = []
-
-            try {
-                todos = JSON.parse(fileContent)
-                if (!Array.isArray(todos)) {
-                    todos = [] // اگر JSON یک آرایه نبود، از اول آرایه بساز
-                }
-            } catch (e) {
-                return callback(e)
-            }
-
             const todoIndex = todos.findIndex(todo => todo.id === Number(id))
-            if (todoIndex !== -1) {
-                todos[todoIndex].completed = true
+            if (todoIndex === -1) {
+                return callback(new Error('Todo not found'))
+            } else {
+                const todo = todos[todoIndex]
+                todo.completed = true
+                todos[todoIndex] = todo
+                saveTodos(todos, (err) => {
+                    if (err) callback(err)
+                    else callback(null)
+                })
             }
-
-            fs.writeFile(filePath, JSON.stringify(todos, null, 2), (err) => {
-                if (err) callback(err)
-                else callback(null)
-            });
         })
     }
-
 }
+
+
 
