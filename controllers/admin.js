@@ -1,4 +1,4 @@
-import { Todo } from '../model/todo.js'
+import Todo from '../model/todo.js'
 import { generateTodoId } from '../utils/todos.js'
 
 export function addTodo(req, res) {

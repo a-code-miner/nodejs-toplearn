@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 
-import sequelize from "../utils/databse";
+import sequelize from "../utils/database.js";
 
 const Todo = sequelize.define('Todo', {
     // Model attributes

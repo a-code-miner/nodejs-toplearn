@@ -1,4 +1,4 @@
-import { Todo } from '../model/todo.js';
+import Todo from '../model/todo.js';
 import { getCompletedTodos, getPendingTodos } from '../utils/todos.js';
 import { completeTodo } from './admin.js';
 
