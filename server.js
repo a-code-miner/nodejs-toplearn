@@ -6,6 +6,7 @@ import { setStatics } from './utils/statics.js'
 import adminRoutes from './routes/admin.js'
 import indexRoutes from './routes/index.js'
 import { get404 } from './controllers/error.js'
+import sequelize from './utils/database.js'
 
 const app = express()
 
@@ -30,7 +31,16 @@ app.use(indexRoutes)
 // 404
 app.use(get404)
 
+// Syncing DB
+sequelize.sync()
+    .then(result => {
+        console.log(result)
+        app.listen(3000, () => {
+            console.log('Server is running on http://localhost:3000')
+        })
+    })
+    .catch((err) => {
+        console.log('There is an error while connecting to database: ', err)
+    })
+
 // Start of Server
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000')
-})
