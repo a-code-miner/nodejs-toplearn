@@ -5,20 +5,20 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -e js,html,json server.js"
+    "start": "nodemon -e js,html,json app.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
     "bootstrap": "^5.3.7",
     "chalk": "^5.4.1",
+    "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "font-awesome": "^4.7.0",
-    "mysql2": "^3.14.2",
-    "sequelize": "^6.37.7",
+    "mongoose": "^8.16.4",
     "uuid": "^11.1.0",
     "yargs": "^18.0.0"
   }
