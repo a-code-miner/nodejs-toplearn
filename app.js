@@ -1,20 +1,29 @@
 import express from 'express'
-import cookieParser from 'cookie-parser'
+import session from 'express-session'
 
 const app = express()
 
-app.use(cookieParser())
+// Custom middleware
+app.use(session({
+    secret: 'password1234',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 600000 }
+}))
 
+// Routes
 app.get('/', (req, res) => {
-    console.log(req.cookies)
-    res.cookie('name', 'express', {
-        // expires: new Date(Date.now() + 60000)
-        maxAge: 60000
-    }).send('Cookie has been saved!')
+    if (req.session.page_views) {
+        req.session.page_views++
+        res.send(`You visited this page ${req.session.page_views} times`)
+    } else {
+        req.session.page_views = 1
+        res.send('Welcome to this page for the first time!')
+    }
+    console.log(`Session: ${req.session.page_views}`)
 })
 
-app.get('/delete-cookie', (req, res) => {
-    res.clearCookie('name').send('Cookie deleted successfully!')
-})
+// Server start
+app.listen(3000, () => { console.log(`Server is running on localhost:3000`) })
 
-app.listen(3000, () => console.log(`Server is running on localhost:3000`))
+
